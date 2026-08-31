@@ -82,7 +82,7 @@ class Zend_Xml_Security
             $dom = new DOMDocument();
         }
 
-        if (!self::isPhpFpm()) {
+        if (!self::isPhpFpm() && PHP_VERSION_ID < 80000) {
             $loadEntities = libxml_disable_entity_loader(true);
             $useInternalXmlErrors = libxml_use_internal_errors(true);
         }
@@ -96,7 +96,7 @@ class Zend_Xml_Security
 
         if (!$result) {
             // Entity load to previous setting
-            if (!self::isPhpFpm()) {
+            if (!self::isPhpFpm() && PHP_VERSION_ID < 80000) {
                 libxml_disable_entity_loader($loadEntities);
                 libxml_use_internal_errors($useInternalXmlErrors);
             }
@@ -116,7 +116,7 @@ class Zend_Xml_Security
         }
 
         // Entity load to previous setting
-        if (!self::isPhpFpm()) {
+        if (!self::isPhpFpm() && PHP_VERSION_ID < 80000) {
             libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
         }
